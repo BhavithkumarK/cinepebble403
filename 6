@@ -1,0 +1,17 @@
+const fs = require('fs');
+
+function listFiles(dir) {
+  const files = fs.readdirSync(dir);
+
+  for (const file of files) {
+    const filepath = `${dir}/${file}`;
+
+    if (fs.statSync(filepath).isDirectory()) {
+      listFiles(filepath);
+    } else {
+      console.log(filepath);
+    }
+  }
+}
+
+listFiles('/path/to/directory');
